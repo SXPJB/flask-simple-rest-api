@@ -39,5 +39,8 @@ ENV/
 # Environment variables
 .env
 
+# Agent
+.junie/
+
 # OS
 .DS_Store
