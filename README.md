@@ -61,18 +61,45 @@ The project follows a simplified Clean Architecture pattern:
 
 ## Getting Started
 
+### Prerequisites
+
+- **Docker & Docker Compose**: Installed and running.
+- **AWS CLI**: Installed and configured.
+
+### Setup Instructions
+
 1. **Setup Infrastructure**:
-   Ensure you have Docker installed and run the bootstrap script:
+   Primero se debe ejecutar el script de bootstrap para levantar los servicios base:
    ```bash
+   chmod +x boostrap.sh
    ./boostrap.sh
    ```
 
-2. **Install Dependencies**:
+2. **Create AWS Resources**:
+   Utiliza la AWS CLI para crear el bucket de S3 y la instancia de RDS (PostgreSQL).
+
+   **RDS (Postgresql):**
+   ```bash
+   aws rds create-db-instance \
+     --db-instance-identifier mypostgres \
+     --db-instance-class db.t3.micro \
+     --engine postgres \
+     --master-username admin \
+     --master-user-password secret123 \
+     --allocated-storage 20
+   ```
+
+   **Bucket S3:**
+   ```bash
+   aws s3 mb s3://my-bucket
+   ```
+
+3. **Install Dependencies**:
    ```bash
    pip install -r requirements.txt
    ```
 
-3. **Run the Application**:
+4. **Run the Application**:
    ```bash
    python main.py
    ```
